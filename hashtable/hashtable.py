@@ -39,6 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        return self.capacity
 
 
     def get_load_factor(self):
@@ -90,6 +91,10 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        index = self.hash_index(key)
+        self.table.insert( index, HashTableEntry(key, value) )
+        self.length += 1
+
 
 
     def delete(self, key):
