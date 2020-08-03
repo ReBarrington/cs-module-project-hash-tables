@@ -22,7 +22,7 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
-        self.capacity = capacity
+        self.capacity = MIN_CAPACITY
         self.table = [None] * capacity
         self.length = 0
 
@@ -39,7 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return self.capacity
+        return len(self.table)
 
 
     def get_load_factor(self):
@@ -92,7 +92,8 @@ class HashTable:
         """
         # Your code here
         index = self.hash_index(key)
-        self.table.insert( index, HashTableEntry(key, value) )
+        entry = HashTableEntry(key, value)
+        self.table[index] = entry
         self.length += 1
 
 
@@ -106,6 +107,8 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        self.put(key, None)
+        self.length -=1
 
 
     def get(self, key):
@@ -117,6 +120,12 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        index = self.hash_index(key)
+        entry = self.table[index]
+        if entry:
+            return entry.value
+        else:
+            return None
 
 
     def resize(self, new_capacity):
