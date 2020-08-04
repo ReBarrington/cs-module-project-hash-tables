@@ -1,3 +1,5 @@
+from linked_list import LinkedList
+
 class HashTableEntry:
     """
     Linked List hash table key/value pair
@@ -6,6 +8,16 @@ class HashTableEntry:
         self.key = key
         self.value = value
         self.next = None
+
+    def get_value(self):
+        return self.value
+
+    def get_next(self):
+        return self.next
+    
+    def set_next(self, new_next):
+        self.next = new_next
+    
 
 
 # Hash table can't have fewer than this many slots
@@ -20,11 +32,11 @@ class HashTable:
     Implement this.
     """
 
-    def __init__(self, capacity):
+    def __init__(self, capacity = MIN_CAPACITY):
         # Your code here
-        self.capacity = MIN_CAPACITY
-        self.table = [None] * capacity
+        self.table = [LinkedList()] * capacity
         self.length = 0
+        self.capacity = capacity
 
 
 
@@ -49,6 +61,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        return self.length / self.capacity
 
 
     def fnv1(self, key):
@@ -92,8 +105,18 @@ class HashTable:
         """
         # Your code here
         index = self.hash_index(key)
+
+        current = self.table[index].head
+
+        print(current, " is current on line 111")
+
+        while current is not None:
+            if current.key == key:
+                current.value = value
+            current = current.next
+            
         entry = HashTableEntry(key, value)
-        self.table[index] = entry
+        self.table[index].add_to_head(entry)
         self.length += 1
 
 
@@ -121,11 +144,12 @@ class HashTable:
         """
         # Your code here
         index = self.hash_index(key)
-        entry = self.table[index]
-        if entry:
-            return entry.value
-        else:
-            return None
+        current = self.table[index].head
+        while current:
+            if current.key == key:
+                return current.value
+            current = current.next_node
+        return None
 
 
     def resize(self, new_capacity):
@@ -136,6 +160,15 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        if self.get_load_factor() > 0.7:
+            old_table = self.table
+            self.table = [LinkedList()] * new_capacity
+            for item in old_table:
+                current = item.head
+                while current:
+                    self.put(current.key, current.value)
+                    current = current.next
+            self.capacity = new_capacity
 
 
 
