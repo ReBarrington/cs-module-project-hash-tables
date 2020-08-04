@@ -9,16 +9,6 @@ class HashTableEntry:
         self.value = value
         self.next = None
 
-    def get_value(self):
-        return self.value
-
-    def get_next(self):
-        return self.next
-    
-    def set_next(self, new_next):
-        self.next = new_next
-    
-
 
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
@@ -34,7 +24,7 @@ class HashTable:
 
     def __init__(self, capacity = MIN_CAPACITY):
         # Your code here
-        self.table = [LinkedList()] * capacity
+        self.table = [LinkedList()] * MIN_CAPACITY
         self.length = 0
         self.capacity = capacity
 
@@ -108,8 +98,6 @@ class HashTable:
 
         current = self.table[index].head
 
-        print(current, " is current on line 111")
-
         while current is not None:
             if current.key == key:
                 current.value = value
@@ -148,7 +136,7 @@ class HashTable:
         while current:
             if current.key == key:
                 return current.value
-            current = current.next_node
+            current = current.next
         return None
 
 

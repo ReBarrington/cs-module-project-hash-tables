@@ -26,19 +26,9 @@ class LinkedList:
         # reference to the tail of the list
         self.tail = None
     
-    def add_to_head (self, value):
-        # wrap the input value in a node
-        new_node = Node(value, None)
-        # check if there is no head (i.e., the list is empty)
-        if not self.head:
-            # if the list is initially empty, set both head and tail to the new node
-            self.head = new_node
-            self.tail = new_node
-        # we have a non-empty list, add the new node to the head
-        else:
-            # set the current head's next reference to our new node
-            self.head.set_next = self.head
-            self.head = new_node
+    def add_to_head (self, node):
+        node.next = self.head
+        self.head = node
 
     def delete(self, value):
         cur = self.head
