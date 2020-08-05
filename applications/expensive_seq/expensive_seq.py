@@ -8,13 +8,14 @@ def expensive_seq(x, y, z):
         return y + z
 
     elif (x, y, z) in cache:
-        v = cache.get((x, y, z))
+        # look for result to be already in cache before calculating
+        result = cache.get((x, y, z))
     
     else:
-        v = expensive_seq(x-1,y+1,z) + expensive_seq(x-2,y+2,z*2) + expensive_seq(x-3,y+3,z*3)
-        cache.update({ (x, y, z): v })
+        result = expensive_seq(x-1,y+1,z) + expensive_seq(x-2,y+2,z*2) + expensive_seq(x-3,y+3,z*3)
+        cache.update({ (x, y, z): result })
 
-    return v
+    return result
 
 
 if __name__ == "__main__":
