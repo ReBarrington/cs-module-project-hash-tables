@@ -1,6 +1,11 @@
 def no_dups(s):
     # Your code here
+    result = []
 
+    for word in s.split():
+        if word not in result and word != '':
+            result.append(word)
+    return str(result).strip('[]')
 
 
 if __name__ == "__main__":
