@@ -7,7 +7,6 @@ class HashTableEntry:
     def __init__(self, key, value):
         self.key = key
         self.value = value
-        self.next = None
 
 
 # Hash table can't have fewer than this many slots
@@ -24,10 +23,9 @@ class HashTable:
 
     def __init__(self, capacity = MIN_CAPACITY):
         # Your code here
-        self.table = [LinkedList()] * MIN_CAPACITY
-        self.length = 0
+        self.table = [LinkedList()] * capacity
         self.capacity = capacity
-
+        self.length = 0
 
 
     def get_num_slots(self):
@@ -41,7 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return len(self.table)
+        return self.capacity
 
 
     def get_load_factor(self):
