@@ -1,6 +1,15 @@
 def no_dups(s):
     # Your code here
+    result = ""
+    words = {}
 
+    for word in s.split():
+        if word not in words and word != "":
+        # if not in words, means not a duplicate. Sets don't accept duplicates.
+            result += f'{word} '
+            words[word] = 1
+    # rstrip() removes white space at end
+    return result.rstrip()
 
 
 if __name__ == "__main__":
@@ -9,3 +18,4 @@ if __name__ == "__main__":
     print(no_dups("hello hello"))
     print(no_dups("cats dogs fish cats dogs"))
     print(no_dups("spam spam spam eggs spam sausage spam spam and spam"))
+
